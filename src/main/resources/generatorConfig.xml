@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry
+		location="D:\java\local\mysql\mysql-connector-java\5.1.41\mysql-connector-java-5.1.41.jar" />
+	<context id="context1">
+		<commentGenerator>
+			<!-- 不生成注释和时间戳 -->
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+			<!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
+        一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖
+     -->
+			<property name="autoDelimitKeywords" value="false"/>
+			<!-- 生成的Java文件的编码 -->
+			<property name="javaFileEncoding" value="UTF-8"/>
+			<!-- 格式化java代码 -->
+			<property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+			<!-- 格式化XML代码 -->
+			<property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+			<!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+			<property name="beginningDelimiter" value="`"/>
+			<property name="endingDelimiter" value="`"/>
+		</commentGenerator>
+
+
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/shop?useUnicode=true&amp;characterEncoding=utf-8"
+			userId="root"
+			password="ywl950319" />
+
+		<javaModelGenerator targetPackage="com.shop.primary.entity" targetProject="src/main/java" />
+		<sqlMapGenerator targetPackage="com.shop.primary.mapper" targetProject="src/main/java/" />
+		<javaClientGenerator targetPackage="com.shop.primary.mapper" targetProject="src/main/java" type="XMLMAPPER" />
+
+		<table  tableName="ky_user" domainObjectName="User">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="status" javaType="com.shop.primary.enums.StatusEnum" />
+			<columnOverride column="create_datetime" typeHandler="org.apache.ibatis.type.InstantTypeHandler" javaType="java.time.Instant" />
+			<columnOverride column="last_update_datetime" typeHandler="org.apache.ibatis.type.InstantTypeHandler" javaType="java.time.Instant" />
+		</table>
+		<!--
+		<table  tableName="ky_permission" domainObjectName="Permission">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="create_datetime" typeHandler="org.apache.ibatis.type.InstantTypeHandler" javaType="java.time.Instant" />
+			<columnOverride column="last_update_datetime" typeHandler="org.apache.ibatis.type.InstantTypeHandler" javaType="java.time.Instant" />
+		</table>
+		<table  tableName="ky_role" domainObjectName="Role">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="create_datetime" typeHandler="org.apache.ibatis.type.InstantTypeHandler" javaType="java.time.Instant" />
+			<columnOverride column="last_update_datetime" typeHandler="org.apache.ibatis.type.InstantTypeHandler" javaType="java.time.Instant" />
+		</table>
+		<table  tableName="ky_user_role" domainObjectName="UserRole">
+		</table>
+		<table  tableName="ky_role_permission" domainObjectName="RolePermission">
+		</table>-->
+	</context>
+</generatorConfiguration>

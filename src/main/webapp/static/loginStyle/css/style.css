@@ -1,0 +1,22 @@
+@charset "utf-8";
+/* golden shands login */
+
+/*----------------2013.07.12----------*/
+.logotop{background:url(../img/bodybg.jpg)  no-repeat;width:990px;margin:0 auto;}
+.logobar{margin:10px 0 0 0;padding:28px 0 0 40px;overflow:hidden;*padding-top:18px;}
+.logo_bar{float:right;position:relative;top:45px;*top:-30px;right:26px;}
+.logo_bar a{margin-right:10px;font:12px \5fae\8f6f\96c5\9ed1,\9ed1\4f53;color:#737375}
+.prowarp{margin:20px 0 30px 40px;float:left;position:relative;_left:-188px;*left:-154px;}
+.logocon{float:right;background:url(../img/login_bg.jpg) no-repeat;width:265px;height:260px;position:relative;left:266px;top:-260px;_left:110px;*left:120px;}
+.logoc{margin:20px 0 0 66px;font:12px \5fae\8f6f\96c5\9ed1,\9ed1\4f53;color:#737375;}
+.logoc li{line-height:22px;margin-bottom:5px;}
+.logoc input{width:160px;}
+.logobtn{cursor:pointer;position:relative;top:6px;}
+.logfont{text-align:center;width:654px;font:12px \5fae\8f6f\96c5\9ed1,\9ed1\4f53;color:#737375;font-weight:bold;clear:both;position:relative;top:-257px;left:10px;_left:100px;}
+.pro_logo{overflow:hidden;padding:15px 10px 15px 100px;margin:0 auto;text-align:center;width:690px;position:relative;top:-248px;_left:100px;}
+.pro_logo li{float:left; list-style-type:none;margin-right:22px;text-align:center;margin-left:12px;margin-top:10px;}
+.adpic li{float:left; list-style-type:none;margin-right:20px;}
+.grounplogo li{float:left; list-style-type:none;margin-right:35px;}/* slide */
+.slide{height:260px;width:650px;}
+.slideItem{top:330px;right:500px;}
+.bigpic{float:left}
