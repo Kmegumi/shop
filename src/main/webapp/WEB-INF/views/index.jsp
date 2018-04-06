@@ -58,7 +58,22 @@
                         </shiro:hasPermission>
                     </ul>
                 </li>
+
                 </shiro:hasPermission>
+
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">商品管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+
+                            <li><a class="J_menuItem" href="<%=path%>/rest/goods/add">添加商品</a></li>
+
+
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>
