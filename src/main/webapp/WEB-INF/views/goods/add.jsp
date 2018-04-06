@@ -29,9 +29,7 @@
                                     <option value="2">冰箱</option>
                                     <option value="3">彩电</option>
                                     <option value="4">彩电</option>
-
                                 </select>
-
                                 <input type="hidden" name="id" value="" class="form-control">
                             </div>
                         </div>
@@ -56,7 +54,7 @@
                         <div class="form-group draggable">
                             <label class="col-sm-3 control-label">商品图片：</label>
                             <div class="col-sm-2">
-                                <input type="file" name="file" onchange="imgUpload" value="" >
+                                <input type="text" name="file" value="" >
                             </div>
                         </div>
                         <div class="form-group draggable">

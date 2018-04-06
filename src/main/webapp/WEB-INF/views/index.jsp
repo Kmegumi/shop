@@ -85,6 +85,11 @@
                 <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
+                    <li class="hidden-xs">
+                        <a href="javaScript:uploadImg();" data-index="0"><i class="fa fa-key fa-fw"></i>
+                            上传图片
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -108,7 +113,15 @@
     <!--右侧部分结束-->
 </div>
 <script>
-
+    function uploadImg() {
+        layer.open({
+            type: 2,
+            title: '上传图片',
+            shadeClose: true, //点击遮罩关闭层
+            area : ['800px' , '520px'],
+            content: '<%=path%>/rest/img/upload'
+        });
+    }
 </script>
 
 </body>
