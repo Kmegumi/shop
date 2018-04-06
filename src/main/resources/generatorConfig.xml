@@ -35,7 +35,7 @@
 		<sqlMapGenerator targetPackage="com.shop.primary.mapper" targetProject="src/main/java/" />
 		<javaClientGenerator targetPackage="com.shop.primary.mapper" targetProject="src/main/java" type="XMLMAPPER" />
 
-		<table  tableName="goods" domainObjectName="Goods">
+		<table  tableName="goods_column" domainObjectName="Column">
 			<generatedKey column="id" sqlStatement="MySql" identity="true" />
 
 		</table>

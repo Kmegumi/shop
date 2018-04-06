@@ -54,7 +54,7 @@
                         <div class="form-group draggable">
                             <label class="col-sm-3 control-label">商品图片：</label>
                             <div class="col-sm-2">
-                                <input type="text" name="file" value="" >
+                                <input type="text" name="goodsPhoto" value="" class="form-control">
                             </div>
                         </div>
                         <div class="form-group draggable">
@@ -129,6 +129,7 @@
             error: function () { }
         });
     }
+
 </script>
 </body>
 

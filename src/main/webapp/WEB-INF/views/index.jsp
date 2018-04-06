@@ -70,10 +70,12 @@
                     <ul class="nav nav-second-level">
 
                             <li><a class="J_menuItem" href="<%=path%>/rest/goods/add">添加商品</a></li>
+                            <li><a class="J_menuItem" href="<%=path%>/rest//column/add">添加栏目</a></li>
 
 
                     </ul>
                 </li>
+
             </ul>
         </div>
     </nav>
