@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <% String path = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +16,6 @@
                 <div class="ibox-title">
                     <h5>用户管理</h5>
                 </div>
-                <input id="token" type="hidden" value="${CSRFToken}"/>
                 <div class="ibox-content">
                     <div class="form-group">
                         <form  action="<%=path%>/rest/admin/list" id="formPage" method="post">
@@ -27,7 +25,7 @@
                             <select name="statusEnum" class="selectCss">
                                 <option value="">所有</option>
                                 <c:forEach items="${statusList}" var="val">
-                                    <option value="${val.name()}" <c:if test="${form.statusEnum == val}">selected="selected"</c:if>>${val.desc}</option>
+                                    <option value="${val.name()}" <c:if test="${form.statusEnum == val}">selected="selected"</c:if>>${val.description}</option>
                                 </c:forEach>
                             </select>
                 <span style="float: right;">
@@ -45,26 +43,23 @@
                             <th>姓名</th>
                             <th>联系电话</th>
                             <th>状态</th>
-                            <%--<th>类型</th>--%>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:if test="${dome != null}">
-                            <c:forEach items="${dome.list}" var="var">
-                                <tr>
-                                    <td class="center">${var.username}</td>
-                                    <td class="center">${var.name}</td>
-                                    <td class="center">${var.mobile}</td>
-                                    <td class="center">${var.status.desc}</td>
-                                    <td class="col-sm-2">
-                                        <a class="btn btn-primary J_menuItem" type="button" href="<%=path%>/rest/admin/edit/${var.id}" >编辑</a>
-                                        <a class="btn btn-primary" type="button" onclick="del(${var.id})" >删除</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </c:if>
-
+                        <c:forEach items="${page.content}" var="demo">
+                            <tr>
+                                <td class="center">${demo.username}</td>
+                                <td class="center">${demo.name}</td>
+                                <td class="center">${demo.mobile}</td>
+                                <td class="center">${demo.status.description}</td>
+                                    <%--<td class="center">${demo.userType.desc}</td>--%>
+                                <td class="col-sm-2">
+                                    <a class="btn btn-primary J_menuItem" type="button" href="<%=path%>/rest/admin/edit/${demo.id}" >编辑</a>
+                                    <a class="btn btn-primary" type="button" onclick="delById(${demo.id})" >删除</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                     <jsp:include page="../row_Bounds.jsp"></jsp:include>
@@ -93,7 +88,6 @@
                 cache: false,
                 dataType: "json",
                 async: true,
-                headers: {token: $('#token').val()},
                 beforeSend: function () { },
                 success: function (data) {
                     if (data) {
@@ -102,7 +96,6 @@
                             $('.confirm').click(function () {
                                 window.location.href="<%=path%>/rest/admin/list";
                             });
-                            getToken();
                         } else {
                             swal("修改失败！", data.msg, "error");
                         }

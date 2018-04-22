@@ -31,7 +31,7 @@ Fixed Issues:
 
 New Features:
 
-* [#16755](http://dev.ckeditor.com/ticket/16755): Added the [Table Selection](http://ckeditor.com/addon/tableselection) plugin that lets you select and manipulate an arbitrary rectangular table fragment (a few cells, a row or a column).
+* [#16755](http://dev.ckeditor.com/ticket/16755): Added the [Table Selection](http://ckeditor.com/addon/tableselection) plugin that lets you select and manipulate an arbitrary rectangular table fragment (a few cells, a row or a goodsColumn).
 * [#16961](http://dev.ckeditor.com/ticket/16961): Added support for pasting from Microsoft Excel.
 * [#13381](http://dev.ckeditor.com/ticket/13381): Dynamic code evaluation call in [`CKEDITOR.template`](http://docs.ckeditor.com/#!/api/CKEDITOR.template) removed. CKEditor can now be used with the `unsafe-eval` Content Security Policy. Thanks to [Caridy Patiño](http://caridy.name)!
 * [#16971](http://dev.ckeditor.com/ticket/16971): Added support for color in the `background` property containing also other styles for table cells in the [Table Tools](http://ckeditor.com/addon/tabletools) plugin.
@@ -769,7 +769,7 @@ Fixed Issues:
 * [#11754](http://dev.ckeditor.com/ticket/11754): [Chrome] Fixed: Infinite loop when content includes not closed attributes.
 * [#11848](http://dev.ckeditor.com/ticket/11848): [IE] Fixed: [`editor.insertElement()`](http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-insertElement) throwing an exception when there was no selection in the editor.
 * [#11801](http://dev.ckeditor.com/ticket/11801): Fixed: Editor anchors unavailable when linking the [Enhanced Image](http://ckeditor.com/addon/image2) widget.
-* [#11626](http://dev.ckeditor.com/ticket/11626): Fixed: [Table Resize](http://ckeditor.com/addon/tableresize) sets invalid column width.
+* [#11626](http://dev.ckeditor.com/ticket/11626): Fixed: [Table Resize](http://ckeditor.com/addon/tableresize) sets invalid goodsColumn width.
 * [#11872](http://dev.ckeditor.com/ticket/11872): Made [`element.addClass()`](http://docs.ckeditor.com/#!/api/CKEDITOR.dom.element-method-addClass) chainable symmetrically to [`element.removeClass()`](http://docs.ckeditor.com/#!/api/CKEDITOR.dom.element-method-removeClass).
 * [#11813](http://dev.ckeditor.com/ticket/11813): Fixed: Link lost while pasting a captioned image and restoring an undo snapshot ([Enhanced Image](http://ckeditor.com/addon/image2)).
 * [#11814](http://dev.ckeditor.com/ticket/11814): Fixed: _Link_ and _Unlink_ entries persistently displayed in the [Enhanced Image](http://ckeditor.com/addon/image2) context menu.

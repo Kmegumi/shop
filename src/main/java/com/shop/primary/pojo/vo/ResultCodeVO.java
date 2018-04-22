@@ -9,7 +9,7 @@ public class ResultCodeVO {
 
     private String code;
 
-    @JSONField(name = "msg")
+    @JSONField(format = "msg")
     private String message;
 
     public final static ResultCodeVO ERR_CODE = new ResultCodeVO("-1", "CSRF ERROR:无效的token，或者token过期");

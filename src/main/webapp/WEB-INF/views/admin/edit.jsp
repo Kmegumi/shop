@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<%
-	String path=request.getContextPath();
-%>
+<% String path=request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,22 +49,13 @@
 								<input type="text" name="email" value="${user.email}" class="form-control" required>
 							</div>
 						</div>
-
-						<div class="form-group draggable">
-							<label class="col-sm-3 control-label">选择角色：</label>
-							<div class="col-sm-2">
-								<input type="button" value="选择" class="form-control" onclick="showRole()"><br/>
-								<textarea cols="50" rows="5" id="role_name" name="roleName">${roleName}</textarea>
-								<input type="hidden" name="roleId" id="roleId" value="${roleId}" class="form-control"required>
-							</div>
-						</div>
 						<input name="version" type="hidden" value="${user.version}"/>
 						<div class="form-group draggable">
 							<label class="col-sm-3 control-label ">状态：</label>
 							<div class="col-sm-2">
 								<select class="form-control" name="status" >
 									<c:forEach items="${statusEnum}" var="val">
-										<option value="${val.name()}" <c:if test="${user.status == val}">selected="selected"</c:if>>${val.desc}</option>
+										<option value="${val.name()}" <c:if test="${user.status == val}">selected="selected"</c:if>>${val.description}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -80,7 +68,6 @@
 							</div>
 						</div>
 					</form>
-					<input id="token" type="hidden" value="${CSRFToken}"/>
 					<div class="clearfix"></div>
 				</div>
 			</div>
@@ -88,15 +75,6 @@
 	</div>
 </div>
 <script>
-	function showRole(){
-		layer.open({
-			type: 2,
-			title: '选择角色',
-			shadeClose: true, //点击遮罩关闭层
-			area : ['800px' , '520px'],
-			content: '<%=path %>/rest/role/roleCheck?roleValue=' + $("#roleId").val()
-		});
-	}
 	function add(){
         $.ajax({
             type: 'POST',
@@ -114,7 +92,6 @@
                         $('.confirm').click(function () {
                             window.location.href="<%=path%>/rest/admin/list";
                         });
-                        getToken();
                     } else {
                         swal("修改失败！", data.msg, "error");
                     }

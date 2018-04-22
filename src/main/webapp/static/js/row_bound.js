@@ -26,7 +26,7 @@ function getMany() {
 
 function page_Num(pageNum, pageCount) {
     var html = '';
-    if (pageNum < 2) {
+    if (pageNum < 1) {
         html += '<li class="paginate_button previous disabled" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_0_previous" >';
         html += '<a type="button">首页</a>';
         html += '</li>';
@@ -43,10 +43,10 @@ function page_Num(pageNum, pageCount) {
         html += '<a type="button">上一页</a>';
         html += '</li>';
     }
-    if (pageNum < 4 && pageCount > 5) {
+    if (pageNum < 3 && pageCount > 5) {
         for (var i = 0; i < pageCount;i++) {
             var index = i + 1;
-            if (index == pageNum) {
+            if (index - 1 == pageNum) {
                 html += getActive(index);
             } else {
                 html += getNoActive(index);
@@ -57,20 +57,20 @@ function page_Num(pageNum, pageCount) {
                 break;
             }
         }
-    } else if (pageNum < 4 && pageCount < 6){
+    } else if (pageNum < 3 && pageCount < 6){
         for (var i = 0; i < pageCount;i++) {
             var index = i + 1;
-            if (index == pageNum) {
+            if (index - 1 == pageNum) {
                 html += getActive(index);
             } else {
                 html += getNoActive(index);
             }
         }
-    } else if (pageNum > 3 && pageNum < 6 && pageCount > 8) {
-        var max = pageNum + 2;
+    } else if (pageNum > 2 && pageNum < 5 && pageCount > 8) {
+        var max = pageNum + 3;
         for (var i = 0; i < pageCount;i++) {
             var index = i + 1;
-            if (index == pageNum) {
+            if (index - 1 == pageNum) {
                 html += getActive(index);
             } else {
                 html += getNoActive(index);
@@ -80,11 +80,11 @@ function page_Num(pageNum, pageCount) {
                 break;
             }
         }
-    } else if (pageNum > 3 && pageNum < 6 && pageCount < 9) {
-        var max = pageNum + 2;
+    } else if (pageNum > 2 && pageNum < 5 && pageCount < 9) {
+        var max = pageNum + 3;
         for (var i = 0; i < pageCount;i++) {
             var index = i + 1;
-            if (index == pageNum) {
+            if (index - 1 == pageNum) {
                 html += getActive(index);
             } else {
                 html += getNoActive(index);
@@ -94,16 +94,16 @@ function page_Num(pageNum, pageCount) {
                 break;
             }
         }
-    } else if (pageNum >= 6 && pageCount < 9) {
+    } else if (pageNum >= 5 && pageCount < 9) {
         for (var i = 0; i < pageCount;i++) {
             var index = i + 1;
-            if (index == pageNum) {
+            if (index - 1 == pageNum) {
                 html += getActive(index);
             } else {
                 html += getNoActive(index);
             }
         }
-    }else if (pageNum >= 6 && pageCount > 8) {
+    }else if (pageNum >= 5 && pageCount > 8) {
         html += '<li class="paginate_button" onclick="pageNum(1)">';
         html += '<a>1</a>';
         html += '</li>';
@@ -111,15 +111,15 @@ function page_Num(pageNum, pageCount) {
         html += '<a>2</a>';
         html += '</li>';
         html += getMany();
-        var pageCha = pageCount - pageNum;
+        var pageCha = pageCount - pageNum - 1;
         var pageStart = 0;
         if (pageCha < 2) {
             pageStart = pageCount - 4;
         } else {
-            pageStart = pageNum - 2;
+            pageStart = pageNum - 1;
         }
         for (var i = 0;i < 5; i++) {
-            if (pageStart == pageNum) {
+            if (pageStart == pageNum + 1) {
                 html += getActive(pageStart);
             } else {
                 html += getNoActive(pageStart);
@@ -131,7 +131,7 @@ function page_Num(pageNum, pageCount) {
         }
     }
 
-    if (pageNum == pageCount || pageCount == 0) {
+    if (pageNum + 1 == pageCount || pageCount == 0) {
         html += '<li class="paginate_button previous disabled" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_0_previous">';
         html += '<a type="button">下一页</a>';
         html += '</li>';
@@ -151,22 +151,22 @@ function page_Num(pageNum, pageCount) {
 }
 
 function pageFirst() {
-    $("#pageNo").val(1);
-    $('#formPage').submit();
+    $("#pageNo").val(0);
+    $('#form').submit();
 }
 function pageTop(){
     $("#pageNo").val(parseInt($("#pageNo").val() - 1));
-    $('#formPage').submit();
+    $('#form').submit();
 }
 function pageXia(){
     $("#pageNo").val(parseInt($("#pageNo").val()) + 1);
-    $('#formPage').submit();
+    $('#form').submit();
 }
 function pageEnd(end) {
-    $("#pageNo").val(end);
-    $('#formPage').submit();
+    $("#pageNo").val(end - 1);
+    $('#form').submit();
 }
 function pageNum(num){
-    $("#pageNo").val(num);
-    $('#formPage').submit();
+    $("#pageNo").val(num - 1);
+    $('#form').submit();
 }

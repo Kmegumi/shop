@@ -1,42 +1,49 @@
 package com.shop.primary.entity;
 
 import com.shop.primary.enums.StatusEnum;
-import java.time.Instant;
 
-public class User {
-    private Integer id;
+import javax.persistence.*;
+import javax.persistence.Column;
 
+@Entity
+@Table(name = "user")
+public class User extends BaseEntity {
+
+    @Column(name = "username")
     private String username;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "mobile")
     private String mobile;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private StatusEnum status;
 
+    @Column(name = "sort_id")
     private Integer sortId;
 
-    private Integer version;
+    @Column(name = "create_user_id")
+    private Long createUserId;
 
-    private Integer createUserId;
+    @Column(name = "last_update_user_id")
+    private Long lastUpdateUserId;
 
-    private Integer lastUpdateUserId;
+    @ManyToOne(targetEntity=User.class ,fetch = FetchType.LAZY)
+    @JoinColumn(name="create_user_id", updatable=false, insertable=false)
+    private User createUser;
 
-    private Instant createDatetime;
-
-    private Instant lastUpdateDatetime;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @ManyToOne(targetEntity=User.class,cascade= CascadeType.REFRESH,fetch = FetchType.LAZY)
+    @JoinColumn(name="last_update_user_id", updatable = false, insertable = false)
+    private User lastUpdateUser;
 
     public String getUsername() {
         return username;
@@ -94,43 +101,50 @@ public class User {
         this.sortId = sortId;
     }
 
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public Integer getCreateUserId() {
+    public Long getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Integer createUserId) {
+    public void setCreateUserId(Long createUserId) {
         this.createUserId = createUserId;
     }
 
-    public Integer getLastUpdateUserId() {
+    public Long getLastUpdateUserId() {
         return lastUpdateUserId;
     }
 
-    public void setLastUpdateUserId(Integer lastUpdateUserId) {
+    public void setLastUpdateUserId(Long lastUpdateUserId) {
         this.lastUpdateUserId = lastUpdateUserId;
     }
 
-    public Instant getCreateDatetime() {
-        return createDatetime;
+    public User getCreateUser() {
+        return createUser;
     }
 
-    public void setCreateDatetime(Instant createDatetime) {
-        this.createDatetime = createDatetime;
+    public void setCreateUser(User createUser) {
+        this.createUser = createUser;
     }
 
-    public Instant getLastUpdateDatetime() {
-        return lastUpdateDatetime;
+    public User getLastUpdateUser() {
+        return lastUpdateUser;
     }
 
-    public void setLastUpdateDatetime(Instant lastUpdateDatetime) {
-        this.lastUpdateDatetime = lastUpdateDatetime;
+    public void setLastUpdateUser(User lastUpdateUser) {
+        this.lastUpdateUser = lastUpdateUser;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", status=" + status +
+                ", sortId=" + sortId +
+                ", createUserId=" + createUserId +
+                ", lastUpdateUserId=" + lastUpdateUserId +
+                "} " + super.toString();
     }
 }

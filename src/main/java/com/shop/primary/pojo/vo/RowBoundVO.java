@@ -7,11 +7,11 @@ import java.util.List;
  */
 public class RowBoundVO<T> {
 
-    private Integer pageNo;
-    private Integer pageSize;
-    private Integer firstResult;
-    private Integer totalCount;
-    private Integer totalPageNum;
+    private Long pageNo;
+    private Long pageSize;
+    private Long firstResult;
+    private Long totalCount;
+    private Long totalPageNum;
     private List<T> list;
 
 
@@ -19,7 +19,7 @@ public class RowBoundVO<T> {
     }
 
 
-    public RowBoundVO(Integer pageNo, Integer pageSize, Integer firstResult, Integer totalCount, Integer totalPageNum) {
+    public RowBoundVO(Long pageNo, Long pageSize, Long firstResult, Long totalCount, Long totalPageNum) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
         this.firstResult = firstResult;
@@ -27,7 +27,7 @@ public class RowBoundVO<T> {
         this.totalPageNum = totalPageNum;
     }
 
-    public RowBoundVO(Integer pageNo, Integer pageSize, Integer totalCount, Integer totalPageNum, Integer firstResult, List<T> list) {
+    public RowBoundVO(Long pageNo, Long pageSize, Long totalCount, Long totalPageNum, Long firstResult, List<T> list) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
         this.totalCount = totalCount;
@@ -36,23 +36,23 @@ public class RowBoundVO<T> {
         this.list = list;
     }
 
-    public Integer getPageNo() {
+    public Long getPageNo() {
         return pageNo;
     }
 
-    public Integer getPageSize() {
+    public Long getPageSize() {
         return pageSize;
     }
 
-    public Integer getTotalCount() {
+    public Long getTotalCount() {
         return totalCount;
     }
 
-    public Integer getTotalPageNum() {
+    public Long getTotalPageNum() {
         return totalPageNum;
     }
 
-    public Integer getFirstResult() {
+    public Long getFirstResult() {
         return firstResult;
     }
 
@@ -60,23 +60,23 @@ public class RowBoundVO<T> {
         return list;
     }
 
-    public void setPageNo(Integer pageNo) {
+    public void setPageNo(Long pageNo) {
         this.pageNo = pageNo;
     }
 
-    public void setPageSize(Integer pageSize) {
+    public void setPageSize(Long pageSize) {
         this.pageSize = pageSize;
     }
 
-    public void setFirstResult(Integer firstResult) {
+    public void setFirstResult(Long firstResult) {
         this.firstResult = firstResult;
     }
 
-    public void setTotalCount(Integer totalCount) {
+    public void setTotalCount(Long totalCount) {
         this.totalCount = totalCount;
     }
 
-    public void setTotalPageNum(Integer totalPageNum) {
+    public void setTotalPageNum(Long totalPageNum) {
         this.totalPageNum = totalPageNum;
     }
 

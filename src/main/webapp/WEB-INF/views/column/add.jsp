@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%
     String path=request.getContextPath();
 %>
@@ -24,13 +23,12 @@
                         <div class="form-group draggable">
                             <label class="col-sm-3 control-label">栏目名称：</label>
                             <div class="col-sm-2">
-                                <input type="text" name="columnName" value="" class="form-control"required>
-                                <input type="hidden" name="id" value="" class="form-control">
+                                <input type="text" name="columnName" value="${column.columnName}" class="form-control"required>
+                                <input type="hidden" name="id" value="${column.id}" class="form-control">
+                                <input name="version" type="hidden" value="${column.version}"/>
                             </div>
                         </div>
-
                         <input name="version" type="hidden" value=""/>
-
                         <div class="hr-line-dashed"></div>
                         <div class="form-group draggable">
                             <div class="col-sm-12 col-sm-offset-3">
@@ -49,14 +47,23 @@
     function add(){
         $.ajax({
             type: 'POST',
-            url: '<%=path%>/rest/column/save',
+            url: '<%=path%>/rest/column/saveOrUpdate',
             data: $('#addForm').serialize(),
             cache: false,
             dataType: "json",
             async: true,
             beforeSend: function () { },
             success: function (data) {
-                alert("操作成功"+data.msg)
+                if (data) {
+                    if (data.code == '200') {
+                        swal("操作成功！", data.msg, "success")
+                        $('.confirm').click(function () {
+                            window.location.href="<%=path%>/rest/column/list";
+                        });
+                    } else {
+                        swal("修改失败！", data.msg, "error");
+                    }
+                }
             },
             error: function () { }
         });

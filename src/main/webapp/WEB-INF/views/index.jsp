@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<%
-    String path=request.getContextPath();
-%>
+<% String path=request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +36,6 @@
                     </div>
 
                 </li>
-                <shiro:hasPermission name="admin:list">
                 <li>
                     <a href="#">
                         <i class="fa fa-home"></i>
@@ -47,20 +43,9 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <shiro:hasPermission name="admin:list">
-                            <li><a class="J_menuItem" href="<%=path%>/rest/admin/list">用户管理</a></li>
-                        </shiro:hasPermission>
-                        <shiro:hasPermission name="role:list">
-                            <li><a class="J_menuItem" href="<%=path%>/rest/role/list">角色管理</a></li>
-                        </shiro:hasPermission>
-                        <shiro:hasPermission name="permission:list">
-                            <li><a class="J_menuItem" href="<%=path%>/rest/permission/list">权限管理</a></li>
-                        </shiro:hasPermission>
+                        <li><a class="J_menuItem" href="<%=path%>/rest/admin/list">用户管理</a></li>
                     </ul>
                 </li>
-
-                </shiro:hasPermission>
-
                 <li>
                     <a href="#">
                         <i class="fa fa-home"></i>
@@ -68,14 +53,32 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-
-                            <li><a class="J_menuItem" href="<%=path%>/rest/goods/add">添加商品</a></li>
-                            <li><a class="J_menuItem" href="<%=path%>/rest//column/add">添加栏目</a></li>
-
-
+                        <li><a class="J_menuItem" href="<%=path%>/rest/goods/list">商品列表</a></li>
+                        <li><a class="J_menuItem" href="<%=path%>/rest/column/list">栏目列表</a></li>
+                        <li><a class="J_menuItem" href="<%=path%>/rest/goodsRecommend/list">推荐商品列表</a></li>
+                        <li><a class="J_menuItem" href="<%=path%>/rest/goodsUpNew/list">上新商品列表</a></li>
                     </ul>
                 </li>
-
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">订单管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="<%=path%>/rest/order/list">订单列表</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">客户管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="<%=path%>/rest/customer/list">客户列表</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>

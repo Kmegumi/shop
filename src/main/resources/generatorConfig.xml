@@ -2,8 +2,8 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
 	<classPathEntry
-		location="/Users/xuzhiyun/.m2/repository/mysql/mysql-connector-java/5.1.43/mysql-connector-java-5.1.43.jar" />
-	<context id="context1">
+		location="d:/java/local/mysql/mysql-connector-java/5.1.45/mysql-connector-java-5.1.45.jar" />
+	<context id="context1" targetRuntime="MyBatis3">
 		<commentGenerator>
 			<!-- 不生成注释和时间戳 -->
 			<property name="suppressAllComments" value="true" />
@@ -24,8 +24,6 @@
 			<property name="endingDelimiter" value="`"/>
 		</commentGenerator>
 
-
-
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://120.55.88.207:3306/demo?useUnicode=true&amp;characterEncoding=utf-8"
 			userId="root"
@@ -36,23 +34,19 @@
 		<javaClientGenerator targetPackage="com.shop.primary.mapper" targetProject="src/main/java" type="XMLMAPPER" />
 
 		<table  tableName="goods_column" domainObjectName="Column">
-			<generatedKey column="id" sqlStatement="MySql" identity="true" />
-
+			<generatedKey goodsColumn="id" sqlStatement="MySql" identity="true" />
 		</table>
-		<!--
-		<table  tableName="ky_permission" domainObjectName="Permission">
-			<generatedKey column="id" sqlStatement="MySql" identity="true" />
-			<columnOverride column="create_datetime" typeHandler="org.apache.ibatis.type.InstantTypeHandler" javaType="java.time.Instant" />
-			<columnOverride column="last_update_datetime" typeHandler="org.apache.ibatis.type.InstantTypeHandler" javaType="java.time.Instant" />
+		<table  tableName="goods" domainObjectName="Goods">
+			<generatedKey goodsColumn="id" sqlStatement="MySql" identity="true" />
+			<columnOverride goodsColumn="start_time" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" javaType="java.time.LocalDateTime" />
+			<columnOverride goodsColumn="create_time" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" javaType="java.time.LocalDateTime" />
+			<columnOverride goodsColumn="last_update_time" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" javaType="java.time.LocalDateTime" />
 		</table>
-		<table  tableName="ky_role" domainObjectName="Role">
-			<generatedKey column="id" sqlStatement="MySql" identity="true" />
-			<columnOverride column="create_datetime" typeHandler="org.apache.ibatis.type.InstantTypeHandler" javaType="java.time.Instant" />
-			<columnOverride column="last_update_datetime" typeHandler="org.apache.ibatis.type.InstantTypeHandler" javaType="java.time.Instant" />
-		</table>
-		<table  tableName="ky_user_role" domainObjectName="UserRole">
-		</table>
-		<table  tableName="ky_role_permission" domainObjectName="RolePermission">
+		<!--<table  tableName="user" domainObjectName="User">
+			<generatedKey goodsColumn="id" sqlStatement="MySql" identity="true" />
+			<columnOverride goodsColumn="status"  javaType="com.shop.primary.enums.StatusEnum" />
+			<columnOverride goodsColumn="create_time" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" javaType="java.time.LocalDateTime" />
+			<columnOverride goodsColumn="last_update_time" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" javaType="java.time.LocalDateTime" />
 		</table>-->
 	</context>
 </generatorConfiguration>

@@ -1,7 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -76,5 +75,38 @@
             },
             error: function () { }
         });
+    }
+    Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+
+    function formatTime(time, text) {
+        var data = new Date(time);
+        if (typeof(text) == 'undefined') {
+            document.write(data.Format("yyyy/MM/dd hh:mm"))
+        } else {
+            document.write(data.Format(text));
+        }
+    }
+
+    function getFormatTime(time, text) {
+        var data = new Date(time);
+        if (typeof(text) == 'undefined') {
+            return data.Format("yyyy/MM/dd hh:mm");
+        } else {
+            return data.Format(text);
+        }
     }
 </script>

@@ -729,33 +729,4 @@ public class DateUtils {
         return Date.from(getInstantByYearAndMonth(year, month));
     }
 
-
-
-    /**
-     * Util类test
-     * */
-    public static void main(String[] args) {
-        /*System.out.println(DateUtils.formatDate(new Date()));
-        System.out.println(DateUtils.formatDate(Instant.now()));
-        System.out.println(DateUtils.formatDateNow());
-        System.out.println(DateUtils.formatDateStart(new Date()));
-        System.out.println(DateUtils.formatDateStart(Instant.now()));
-        System.out.println(DateUtils.formatTodayStart());
-        System.out.println(DateUtils.formatDateEnd(new Date()));
-        System.out.println(DateUtils.formatDateEnd(Instant.now()));
-        System.out.println(DateUtils.formatTodayEnd());
-        System.out.println(DateUtils.formatDateOfPattern(new Date(), "yyyy-MM-dd"));
-        System.out.println(DateUtils.formatDateOfPattern(Instant.now(), "yyyy-MM-dd"));
-        System.out.println(DateUtils.formatDateOfPatternNow("yyyy-MM-dd"));
-        System.out.println(DateUtils.parseDate("2017-08-15 17:20:00"));
-        System.out.println(DateUtils.parseDateToInstant("2017-08-15 17:20:00"));
-        System.out.println(DateUtils.parseDateToDate("2017-08-15 17:20:00"));
-        System.out.println(DateUtils.parseDate("2017/08/15 17:20:00", "yyyy/MM/dd HH:mm:ss"));
-        System.out.println(DateUtils.parseDateToInstant("2017/08/15 17:20:00", "yyyy/MM/dd HH:mm:ss"));
-        System.out.println(DateUtils.parseDateToDate("2017/08/15 17:20:00", "yyyy/MM/dd HH:mm:ss"));
-        System.out.println(DateUtils.getMonthLastDay(1995,3));
-        System.out.println(DateUtils.getLocalDateByYearAndMonth(1995,3));
-        System.out.println(DateUtils.getInstantByYearAndMonth(1995,3));
-        System.out.println(DateUtils.getDateByYearAndMonth(1995,3));*/
-    }
 }

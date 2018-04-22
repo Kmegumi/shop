@@ -125,16 +125,6 @@ public class HttpUtil {
         return result;
     }
 
-    public static void main(String[] args) {
-        //发送 GET 请求
-        String s= HttpUtil.sendGet("http://localhost:6144/Home/RequestString", "key=123&v=456");
-        System.out.println(s);
-
-        //发送 POST 请求
-        String sr= HttpUtil.sendPost("http://localhost:6144/Home/RequestPostString", "key=123&v=456");
-        System.out.println(sr);
-    }
-
     public static final String X_REQUESTED_WIDTH = "X-Requested-With";
     public static final String XML_HTTP_REQUEST = "XMLHttpRequest";
 

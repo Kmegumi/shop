@@ -68,12 +68,12 @@
 	overflow: hidden; 
 	position:relative;
 }
-.ui-th-column, .ui-jqgrid .ui-jqgrid-htable th.ui-th-column {
+.ui-th-goodsColumn, .ui-jqgrid .ui-jqgrid-htable th.ui-th-goodsColumn {
 	overflow: hidden;
 	white-space: nowrap;
 }
-.ui-th-column-header, 
-.ui-jqgrid .ui-jqgrid-htable th.ui-th-column-header {
+.ui-th-goodsColumn-header,
+.ui-jqgrid .ui-jqgrid-htable th.ui-th-goodsColumn-header {
 	overflow: hidden;
 	white-space: nowrap;
 }

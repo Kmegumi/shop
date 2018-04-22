@@ -1,54 +1,80 @@
 package com.shop.primary.service;
 
+import com.shop.primary.dao.GoodsDao;
+import com.shop.primary.dao.GoodsRecommendDao;
+import com.shop.primary.entity.BaseEntity;
 import com.shop.primary.entity.Goods;
-import com.shop.primary.entity.User;
-import com.shop.primary.mapper.GoodsMapper;
-import com.shop.primary.mapper.UserMapper;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
+import com.shop.primary.entity.GoodsRecommend;
+import com.shop.primary.pojo.query.AdminQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
-import java.util.Date;
+import javax.persistence.criteria.Predicate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class GoodsService {
+public class GoodsService extends BaseService<GoodsDao, Goods> {
+
     private static final Logger logger = LoggerFactory.getLogger(GoodsService.class);
 
-    @Resource
-    private GoodsMapper goodsMapper;
+    @Autowired
+    private GoodsRecommendDao goodsRecommendDao;
 
-    @Transactional
-    public Goods save(Goods goods){
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User) subject.getPrincipal();
-        goods.setCreateTime(new Date());
-        goods.setCreateUserId(user.getId());
-        goods.setLastUpdateTime(new Date());
-        goods.setLastUpdateUserId(user.getId());
-        goods.setVersion(0);
-        int count = 0;
+    public Page<Goods> rowBound(AdminQuery adminQuery) {
+        if (adminQuery == null) {
+            return null;
+        }
         try {
-            count = goodsMapper.insert(goods);
-        } catch (Exception e) {
-            logger.error(e.getMessage()+goods.toString(), e);
-            throw new RuntimeException("cha ru shibai ");
+            Page<Goods> page = this.dao.findAll((root, query, builder) -> {
+                List<Predicate> list = new ArrayList<>();
+                if (adminQuery.getName() != null && !"".equals(adminQuery.getName())) {
+                    list.add(builder.like(root.get("goodsName"), "%"+adminQuery.getName()+"%"));
+                }
+                return builder.and(list.toArray(new Predicate[list.size()]));
+            }, adminQuery.getPageable());
+            return page;
+        }catch (Exception e) {
+            logger.error(adminQuery.toString() + "_" + e.getMessage(), e);
         }
-        if (count == 0) {
-            return null;
-        }
-        else if (count == 1) {
-            return goods;
-        }
-        else if (count > 1) {
-            throw new RuntimeException("sql zhurule ");
-        }
-        else {
-            return null;
-        }
+        return null;
     }
 
+    public Goods saveOrUpdate(Goods goods) {
+        if (goods == null) {
+            return null;
+        }
+        if (goods.getId() != null) {
+            Goods oldGoods = this.getById(goods.getColumnId());
+            oldGoods.setColumnId(goods.getColumnId());
+            oldGoods.setGoodsCode(goods.getGoodsCode());
+            oldGoods.setGoodsImg(goods.getGoodsImg());
+            oldGoods.setGoodsInfo(goods.getGoodsInfo());
+            oldGoods.setGoodsName(goods.getGoodsName());
+            oldGoods.setGoodsIntro(goods.getGoodsIntro());
+            oldGoods.setGoodsPrice(goods.getGoodsPrice());
+            oldGoods.setGoodsStock(goods.getGoodsStock());
+            oldGoods.setLastUpdateUserId(goods.getLastUpdateUserId());
+            oldGoods.setSortNum(goods.getSortNum());
+            oldGoods.setStartTime(goods.getStartTime());
+            oldGoods.setVersion(goods.getVersion());
+            return this.update(oldGoods);
+        }
+        goods.setVersion(0L);
+        return this.save(goods);
+    }
+
+    public List<Goods> listGoodsNotInGoodsRecommendList(Long goodsId){
+        List<GoodsRecommend> list = goodsRecommendDao.findAll();
+        List<Long> idList = list.parallelStream().filter(i->i.getGoodsId().longValue() != goodsId.longValue()).map(BaseEntity::getId).collect(Collectors.toList());
+        if(idList != null && idList.size() > 0) {
+            return this.dao.findAllByIdNotIn(idList);
+        } else {
+            return this.dao.findAll();
+        }
+    }
 }

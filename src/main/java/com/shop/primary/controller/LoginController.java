@@ -1,23 +1,20 @@
 package com.shop.primary.controller;
 
-import com.shop.core.common.AdminCoreController;
-import com.shop.core.exception.ServiceException;
+import com.shop.core.common.BaseController;
+import com.shop.primary.constant.Config;
+import com.shop.primary.entity.User;
+import com.shop.primary.enums.StatusEnum;
 import com.shop.primary.pojo.query.AdminLoginQuery;
 import com.shop.primary.pojo.vo.ResultCodeVO;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+import com.shop.primary.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 后台登录管理控制器
@@ -27,24 +24,12 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/login")
-public class LoginController extends AdminCoreController {
+public class LoginController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    /**
-     * shiro转发默认login页
-     * @return
-     */
-    @RequestMapping(value = "index",method = RequestMethod.GET)
-    public String index() {
-        Subject subject = SecurityUtils.getSubject();
-        // 已登陆则 跳到首页
-        if (subject.isAuthenticated()) {
-            return "redirect:/rest/index";
-        }
-        return "login";
-    }
-
+    @Autowired
+    private AdminService adminService;
 
     /**
      * 登录请求
@@ -54,22 +39,17 @@ public class LoginController extends AdminCoreController {
     @ResponseBody
     public ResultCodeVO login(AdminLoginQuery adminLoginQuery) {
         try {
-            Subject subject = SecurityUtils.getSubject();
-            // 已登陆则先退出
-            if (subject.isAuthenticated()) {
-                subject.logout();
-            }
-            if (StringUtils.isBlank(adminLoginQuery.getUsername()) || StringUtils.isBlank(adminLoginQuery.getPassword())) {
+            if (StringUtils.isEmpty(adminLoginQuery.getUsername()) || StringUtils.isEmpty(adminLoginQuery.getPassword())) {
                 return ResultCodeVO.PASSWORD_NULL;
             }
-            // shiro身份验证
-            subject.login(new UsernamePasswordToken(adminLoginQuery.getUsername(), adminLoginQuery.getPassword()));
-        } catch (AuthenticationException e) {
-            // 身份验证失败
-            logger.info(adminLoginQuery.toString()+"_"+e.getMessage()+"_"+getClientIp(), e);
-            return ResultCodeVO.PASSWORD_ERROR;
-        } catch (ServiceException e) {
-            return new ResultCodeVO("0", e.getMessage());
+            User authentication = adminService.userLoginCheck(adminLoginQuery);
+            if (authentication == null) {
+                return ResultCodeVO.PASSWORD_ERROR;
+            }
+            if(authentication.getStatus().name().equals(StatusEnum.N.name())){
+                return new ResultCodeVO("400","该账号被禁用,请联系管理员！");
+            }
+            request.getSession().setAttribute(Config.USER_INFO, authentication);
         } catch (Exception e) {
             logger.error(adminLoginQuery.toString()+"_"+e.getMessage()+"_"+getClientIp(), e);
             return ResultCodeVO.ACCOUNT_ERR;
@@ -83,8 +63,7 @@ public class LoginController extends AdminCoreController {
      */
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String logout() {
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
+        request.getSession().setAttribute(Config.USER_INFO, null);
         return "login";
     }
 }

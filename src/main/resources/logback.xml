@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!--<layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </layout>-->
+        <encoder>
+            <pattern>%d{yyyy:MM:dd HH:mm:ss.SSS} %4r %highlight([%thread] %-5level) %logger{37} - %boldCyan(%msg %n)</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+    <appender name="A1" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/home/test/logs/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/home/test/logs/error-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <!--<layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </layout>-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy:MM:dd HH:mm:ss.SSS} %4r %highlight([%thread] %-5level) %logger{37} - %boldRed(%msg %n)</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <append>true</append>
+        <prudent>false</prudent>
+    </appender>
+    <!--<logger name="com.base22" level="TRACE"/>-->
+    <root level="DEBUG">
+        <appender-ref ref="A1"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

@@ -5,12 +5,9 @@ import com.shop.primary.enums.StatusEnum;
 import com.shop.primary.pojo.BaseQuery;
 import org.springframework.web.bind.annotation.PathVariable;
 
-/**
- * Created by Dell on 2017/7/28.
- */
 public class AdminQuery extends BaseQuery {
 
-    private Integer id;
+    private Long id;
 
     private User user;
 
@@ -19,11 +16,11 @@ public class AdminQuery extends BaseQuery {
     public AdminQuery() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(@PathVariable Integer id) {
+    public void setId(@PathVariable Long id) {
         this.id = id;
     }
 

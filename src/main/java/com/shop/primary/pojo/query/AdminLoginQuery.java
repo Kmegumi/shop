@@ -1,8 +1,5 @@
 package com.shop.primary.pojo.query;
 
-/**
- * Created by Dell on 2017/7/28.
- */
 public class AdminLoginQuery {
 
     private String username;

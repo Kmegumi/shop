@@ -1,63 +1,89 @@
 package com.shop.primary.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.*;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.net.URLEncoder;
+import java.time.LocalDateTime;
 
-public class Goods {
-    private Integer id;
+@Entity
+@Table(name = "goods")
+public class Goods extends BaseEntity {
 
-    private Integer colummId;
+    @Column(name = "column_id")
+    private Long columnId;
 
-    private String goodsNum;
+    @ManyToOne(targetEntity= GoodsColumn.class ,fetch = FetchType.LAZY)
+    @JoinColumn(name="column_id", updatable=false, insertable=false)
+    private GoodsColumn goodsColumn;
 
+    @Column(name = "goods_code")
+    private String goodsCode;
+
+    @Column(name = "goods_name")
     private String goodsName;
 
+    @Column(name = "goods_intro")
     private String goodsIntro;
 
-    private String goodsPhoto;
+    @Column(name = "goods_img")
+    private String goodsImg;
 
+    @Column(name = "goods_price")
     private BigDecimal goodsPrice;
 
+    @Column(name = "goods_stock")
     private Integer goodsStock;
 
-    private Date startTime;
+    @Column(name = "start_time")
+    @JSONField(format = "yyyy/MM/dd HH:mm")
+    private LocalDateTime startTime;
 
-    private Integer sortNumber;
+    @Column(name = "sort_num")
+    private Integer sortNum;
 
-    private Date createTime;
-
-    private Date lastUpdateTime;
-
-    private Integer version;
-
-    private Integer createUserId;
-
-    private Integer lastUpdateUserId;
-
+    @Column(name = "goods_info")
     private String goodsInfo;
 
-    public Integer getId() {
-        return id;
+    @Column(name = "create_user_id")
+    private Long createUserId;
+
+    @Column(name = "last_update_user_id")
+    private Long lastUpdateUserId;
+
+    @ManyToOne(targetEntity=User.class ,fetch = FetchType.LAZY)
+    @JoinColumn(name="create_user_id", updatable=false, insertable=false)
+    private User createUser;
+
+    @ManyToOne(targetEntity=User.class,cascade= CascadeType.REFRESH,fetch = FetchType.LAZY)
+    @JoinColumn(name="last_update_user_id", updatable = false, insertable = false)
+    private User lastUpdateUser;
+
+    public Long getColumnId() {
+        return columnId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setColumnId(Long columnId) {
+        this.columnId = columnId;
     }
 
-    public Integer getColummId() {
-        return colummId;
+    public GoodsColumn getGoodsColumn() {
+        return goodsColumn;
     }
 
-    public void setColummId(Integer colummId) {
-        this.colummId = colummId;
+    public void setGoodsColumn(GoodsColumn goodsColumn) {
+        this.goodsColumn = goodsColumn;
     }
 
-    public String getGoodsNum() {
-        return goodsNum;
+    public String getGoodsCode() {
+        return goodsCode;
     }
 
-    public void setGoodsNum(String goodsNum) {
-        this.goodsNum = goodsNum;
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode;
     }
 
     public String getGoodsName() {
@@ -76,12 +102,12 @@ public class Goods {
         this.goodsIntro = goodsIntro;
     }
 
-    public String getGoodsPhoto() {
-        return goodsPhoto;
+    public String getGoodsImg() {
+        return goodsImg;
     }
 
-    public void setGoodsPhoto(String goodsPhoto) {
-        this.goodsPhoto = goodsPhoto;
+    public void setGoodsImg(String goodsImg) {
+        this.goodsImg = goodsImg;
     }
 
     public BigDecimal getGoodsPrice() {
@@ -100,67 +126,86 @@ public class Goods {
         this.goodsStock = goodsStock;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public Integer getSortNumber() {
-        return sortNumber;
+    public Integer getSortNum() {
+        return sortNum;
     }
 
-    public void setSortNumber(Integer sortNumber) {
-        this.sortNumber = sortNumber;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public Integer getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(Integer createUserId) {
-        this.createUserId = createUserId;
-    }
-
-    public Integer getLastUpdateUserId() {
-        return lastUpdateUserId;
-    }
-
-    public void setLastUpdateUserId(Integer lastUpdateUserId) {
-        this.lastUpdateUserId = lastUpdateUserId;
+    public void setSortNum(Integer sortNum) {
+        this.sortNum = sortNum;
     }
 
     public String getGoodsInfo() {
         return goodsInfo;
     }
 
+    public String getEncoderGoodsInfo(){
+        try {
+            return URLEncoder.encode(goodsInfo, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
     public void setGoodsInfo(String goodsInfo) {
         this.goodsInfo = goodsInfo;
+    }
+
+    public Long getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
+    }
+
+    public Long getLastUpdateUserId() {
+        return lastUpdateUserId;
+    }
+
+    public void setLastUpdateUserId(Long lastUpdateUserId) {
+        this.lastUpdateUserId = lastUpdateUserId;
+    }
+
+    public User getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(User createUser) {
+        this.createUser = createUser;
+    }
+
+    public User getLastUpdateUser() {
+        return lastUpdateUser;
+    }
+
+    public void setLastUpdateUser(User lastUpdateUser) {
+        this.lastUpdateUser = lastUpdateUser;
+    }
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "columnId=" + columnId +
+                ", goodsCode='" + goodsCode + '\'' +
+                ", goodsName='" + goodsName + '\'' +
+                ", goodsIntro='" + goodsIntro + '\'' +
+                ", goodsImg='" + goodsImg + '\'' +
+                ", goodsPrice=" + goodsPrice +
+                ", goodsStock=" + goodsStock +
+                ", startTime=" + startTime +
+                ", sortNum=" + sortNum +
+                ", goodsInfo='" + goodsInfo + '\'' +
+                ", createUserId=" + createUserId +
+                ", lastUpdateUserId=" + lastUpdateUserId +
+                "} " + super.toString();
     }
 }

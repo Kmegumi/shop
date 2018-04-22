@@ -1,8 +1,10 @@
 package com.shop.primary.pojo;
 
-/**
- * Created by Dell on 2017/8/9.
- */
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+import java.time.LocalDateTime;
+
 public class BaseQuery {
 
     private Integer pageNo;
@@ -11,9 +13,9 @@ public class BaseQuery {
 
     private String name;
 
-    private String startDate;
+    private LocalDateTime startTime;
 
-    private String endDate;
+    private LocalDateTime endTime;
 
     private String code;
 
@@ -29,7 +31,7 @@ public class BaseQuery {
 
     public Integer getPageNo() {
         if (pageNo == null) {
-            return 1;
+            return 0;
         }
         return pageNo;
     }
@@ -57,20 +59,20 @@ public class BaseQuery {
         this.name = name;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
     public String getCode() {
@@ -81,8 +83,8 @@ public class BaseQuery {
         this.code = code;
     }
 
-    public Integer getFirstResult(){
-        return (this.getPageNo() - 1) * this.getPageSize();
+    public Long getFirstResult(){
+        return (this.getPageNo() - 1L) * this.getPageSize();
     }
 
     public String getLimit(){
@@ -102,14 +104,18 @@ public class BaseQuery {
                 .toString();
     }
 
+    public Pageable getPageable(){
+        return new PageRequest(getPageNo(), getPageSize());
+    }
+
     @Override
     public String toString() {
         return "BaseQuery{" +
                 "pageNo=" + pageNo +
                 ", pageSize=" + pageSize +
                 ", name='" + name + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
                 ", code='" + code + '\'' +
                 ", orderByClause='" + orderByClause + '\'' +
                 '}';

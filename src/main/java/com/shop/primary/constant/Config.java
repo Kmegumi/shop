@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
  */
 public class Config {
 
+	public final static String USER_INFO = "USER_INFO";
 
 	public String get(String key) {
 		return bundle.getString(key);

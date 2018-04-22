@@ -1,18 +1,18 @@
 package com.shop.core.common;
 
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
+import com.shop.core.exception.UserNotFoundException;
+import com.shop.primary.constant.Config;
+import com.shop.primary.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 
 public class BaseController {
 
 
-    @Resource
+    @Autowired
     protected HttpServletRequest request;
 
     /**
@@ -39,6 +39,14 @@ public class BaseController {
             ip = "";
         }
         return ip;
+    }
+
+    protected User getLoginInfo(){
+        User loginInfo = (User) request.getSession().getAttribute(Config.USER_INFO);
+        if (loginInfo == null) {
+            throw new UserNotFoundException("缺少登录信息");
+        }
+        return loginInfo;
     }
 
 }
