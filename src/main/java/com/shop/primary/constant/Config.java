@@ -9,6 +9,8 @@ public class Config {
 
 	public final static String USER_INFO = "USER_INFO";
 
+	public final static String CUSTOMER_INFO = "CUSTOMER_INFO";
+
 	public String get(String key) {
 		return bundle.getString(key);
 	}

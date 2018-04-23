@@ -1,0 +1,79 @@
+
+
+.spinner {
+    height: 32px;
+    overflow: hidden;
+    *zoom: 1;
+    -webkit-box-shadow: 0 3px 3px -4px #aaa;
+    -moz-box-shadow: 0 3px 3px -4px #aaa;
+    box-shadow: 0 3px 3px -4px #aaa
+}
+
+.spinner button, .spinner .value {
+    text-align: center;
+    display: block;
+    float: left;
+    height: 100%;
+    line-height: 25px;
+    margin: 0
+}
+
+.spinner button {
+    border: none;
+    width: 23px;
+    color: #e5312a;
+    font: 22px Arial bold;
+    padding: 0;
+    outline: none
+}
+
+.spinner .decrease {
+    cursor: pointer;
+    background: #fff;
+    color: #51A3CC;
+    width: 48px;
+    font-size: 20px;
+    border: 1px solid #51A3CC;
+    border-right: 0;
+}
+
+.spinner .decrease[disabled] {
+    background-position: 0 -75px;
+    cursor: default
+}
+
+.spinner .increase {
+    cursor: pointer;
+    border: #51A3CC;
+    border-radius: 0 2px 2px 0;
+    background: #fff;
+    color: #51A3CC;
+    width: 48px;
+    font-size: 20px;
+    border: 1px solid #51A3CC;
+}
+
+.spinner .value {
+    width: 64px;
+    border: none;
+    font-family: Arial;
+    color: #51A3CC;
+    padding: 0px;
+    font-size: 15px;
+    border-top: 1px solid #51A3CC;
+    border-bottom: 1px solid #51A3CC;
+    height: 32px;
+    border-left: 1px solid #51A3CC;
+}
+
+.spinner .value.passive {
+    color: #51A3CC;
+    width: 64px;
+    border-top: 1px solid #51A3CC;
+    border-bottom: 1px solid #51A3CC;
+    height: 32px;
+}
+
+.spinner .error, .spinner .invalid {
+    background: #aa0000
+}

@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CollectDao extends JpaRepository<Collect, Long>, JpaSpecificationExecutor {
+
+    Collect findByCustomerIdAndGoodsId(Long customerId, Long goodsId);
+
 }

@@ -60,6 +60,9 @@ public class Order extends BaseEntity {
     @Column(name = "pay_time")
     private LocalDateTime payTime;
 
+    @Column(name = "cancel_message")
+    private String cancelMessage;
+
     public Long getCustomerId() {
         return customerId;
     }
@@ -156,6 +159,14 @@ public class Order extends BaseEntity {
         this.payTime = payTime;
     }
 
+    public String getCancelMessage() {
+        return cancelMessage;
+    }
+
+    public void setCancelMessage(String cancelMessage) {
+        this.cancelMessage = cancelMessage;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -169,6 +180,7 @@ public class Order extends BaseEntity {
                 ", message='" + message + '\'' +
                 ", shippingDetail='" + shippingDetail + '\'' +
                 ", payTime=" + payTime +
+                ", cancelMessage='" + cancelMessage + '\'' +
                 "} " + super.toString();
     }
 }

@@ -1,8 +1,10 @@
 package com.shop.core.common;
 
 
+import com.shop.core.exception.CustomerNotFoundException;
 import com.shop.core.exception.UserNotFoundException;
 import com.shop.primary.constant.Config;
+import com.shop.primary.entity.Customer;
 import com.shop.primary.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -49,4 +51,16 @@ public class BaseController {
         return loginInfo;
     }
 
+    protected Customer checkCustomerInfo(){
+        Customer customer = (Customer) request.getSession().getAttribute(Config.CUSTOMER_INFO);
+        if (customer == null) {
+            throw new CustomerNotFoundException("缺少登录信息");
+        }
+        return customer;
+    }
+
+    protected Customer getCustomerInfo(){
+        Customer customer = (Customer) request.getSession().getAttribute(Config.CUSTOMER_INFO);
+        return customer;
+    }
 }

@@ -1,9 +1,6 @@
 package com.shop.primary.controller;
 
 import com.shop.core.common.BaseController;
-import com.shop.core.exception.UserNotFoundException;
-import com.shop.primary.constant.Config;
-import com.shop.primary.entity.User;
 import com.shop.primary.pojo.query.AdminQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

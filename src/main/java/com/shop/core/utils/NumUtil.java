@@ -7,7 +7,8 @@ import java.util.*;
 
 
 public class NumUtil {
-    private static final int DEF_DIV_SCALE = 8; //这个类不能实例化
+    //这个类不能实例化
+    private static final int DEF_DIV_SCALE = 8;
 
 
     public static String createDateNo() {

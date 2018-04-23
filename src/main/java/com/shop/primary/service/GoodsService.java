@@ -2,15 +2,18 @@ package com.shop.primary.service;
 
 import com.shop.primary.dao.GoodsDao;
 import com.shop.primary.dao.GoodsRecommendDao;
+import com.shop.primary.dao.GoodsUpNewDao;
 import com.shop.primary.entity.BaseEntity;
 import com.shop.primary.entity.Goods;
 import com.shop.primary.entity.GoodsRecommend;
+import com.shop.primary.entity.GoodsUpNew;
 import com.shop.primary.pojo.query.AdminQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
@@ -18,12 +21,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class GoodsService extends BaseService<GoodsDao, Goods> {
 
     private static final Logger logger = LoggerFactory.getLogger(GoodsService.class);
 
     @Autowired
     private GoodsRecommendDao goodsRecommendDao;
+    @Autowired
+    private GoodsUpNewDao goodsUpNewDao;
 
     public Page<Goods> rowBound(AdminQuery adminQuery) {
         if (adminQuery == null) {
@@ -70,11 +76,25 @@ public class GoodsService extends BaseService<GoodsDao, Goods> {
 
     public List<Goods> listGoodsNotInGoodsRecommendList(Long goodsId){
         List<GoodsRecommend> list = goodsRecommendDao.findAll();
-        List<Long> idList = list.parallelStream().filter(i->i.getGoodsId().longValue() != goodsId.longValue()).map(BaseEntity::getId).collect(Collectors.toList());
+        List<Long> idList = list.parallelStream().filter(i->!i.getGoodsId().equals(goodsId)).map(BaseEntity::getId).collect(Collectors.toList());
         if(idList != null && idList.size() > 0) {
             return this.dao.findAllByIdNotIn(idList);
         } else {
             return this.dao.findAll();
         }
+    }
+
+    public List<Goods> listGoodsNotInGoodsUpNewList(Long goodsId){
+        List<GoodsUpNew> list = goodsUpNewDao.findAll();
+        List<Long> idList = list.parallelStream().filter(i->!i.getGoodsId().equals(goodsId)).map(BaseEntity::getId).collect(Collectors.toList());
+        if(idList != null && idList.size() > 0) {
+            return this.dao.findAllByIdNotIn(idList);
+        } else {
+            return this.dao.findAll();
+        }
+    }
+
+    public List<Goods> findAllByColumnId(Long columnId){
+        return this.dao.findAllByColumnId(columnId);
     }
 }

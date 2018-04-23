@@ -16,12 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * 后台登录管理控制器
- *
- * @author yuweilun
- * @date 2017/8/16
- */
 @Controller
 @RequestMapping("/login")
 public class LoginController extends BaseController {

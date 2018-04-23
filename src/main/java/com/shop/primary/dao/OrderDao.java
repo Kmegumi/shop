@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrderDao extends JpaRepository<Order, Long>, JpaSpecificationExecutor {
+
+    Order findByOrderNum(String orderNum);
+
 }

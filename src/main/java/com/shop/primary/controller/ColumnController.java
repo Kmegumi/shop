@@ -49,11 +49,10 @@ public class ColumnController extends BaseController {
     @ResponseBody
     public ResultCodeVO save(GoodsColumn goodsColumn){
         getLoginInfo();
-        User user = getLoginInfo();
         try {
             goodsColumn = columnService.saveOrUpdate(goodsColumn);
         } catch (Exception e) {
-            logger.error(user.toString()+"_"+e.getMessage(), e);
+            logger.error(goodsColumn.toString()+"_"+e.getMessage(), e);
         }
         if (goodsColumn == null) {
             return new ResultCodeVO("400", "保存失败");

@@ -1,12 +1,8 @@
 package com.shop.primary.service;
 
-import com.shop.core.utils.CoderUtil;
 import com.shop.primary.dao.GoodsRecommendDao;
 import com.shop.primary.entity.GoodsRecommend;
-import com.shop.primary.entity.User;
-import com.shop.primary.pojo.query.AdminLoginQuery;
 import com.shop.primary.pojo.query.AdminQuery;
-import org.apache.commons.codec.CharEncoding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -32,7 +27,7 @@ public class GoodsRecommendService extends BaseService<GoodsRecommendDao, GoodsR
             Page<GoodsRecommend> page = this.dao.findAll((root, query, builder) -> {
                 List<Predicate> list = new ArrayList<>();
                 if (adminQuery.getName() != null && !"".equals(adminQuery.getName())) {
-                    list.add(builder.like(root.get("goods.goodsName"), "%"+adminQuery.getName()+"%"));
+                    list.add(builder.like(root.get("goods").get("goodsName"), "%"+adminQuery.getName()+"%"));
                 }
                 return builder.and(list.toArray(new Predicate[list.size()]));
             }, adminQuery.getPageable());

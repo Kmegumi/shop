@@ -14,10 +14,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * @author megumi
- * @date 2018/4/6
- */
 @Controller
 @RequestMapping("img")
 public class UploadController {

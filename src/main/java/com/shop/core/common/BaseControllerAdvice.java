@@ -1,5 +1,6 @@
 package com.shop.core.common;
 
+import com.shop.core.exception.CustomerNotFoundException;
 import com.shop.core.exception.UserNotFoundException;
 import com.shop.core.utils.HttpUtil;
 import org.slf4j.Logger;
@@ -20,7 +21,7 @@ public class BaseControllerAdvice {
 
     @ExceptionHandler(value = {UserNotFoundException.class})
     @ResponseBody
-    public Object bookerNotFoundExp(UserNotFoundException ex, HttpServletRequest request) {
+    public Object userNotFoundExp(UserNotFoundException ex, HttpServletRequest request) {
         if (HttpUtil.isAjaxRequest(request)) {
             Map<String, String> map = new HashMap<>(4);
             map.put("code", "400");
@@ -29,6 +30,19 @@ public class BaseControllerAdvice {
         }
         //返回登录页
         return new ModelAndView("redirect:/rest/admin/login");
+    }
+
+    @ExceptionHandler(value = {CustomerNotFoundException.class})
+    @ResponseBody
+    public Object customerNotFoundExp(CustomerNotFoundException ex, HttpServletRequest request) {
+        if (HttpUtil.isAjaxRequest(request)) {
+            Map<String, String> map = new HashMap<>(4);
+            map.put("code", "401");
+            map.put("msg", "请登录用户");
+            return map;
+        }
+        //返回登录页
+        return new ModelAndView("redirect:/rest/front/commonLogin");
     }
 
 }

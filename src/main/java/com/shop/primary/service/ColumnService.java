@@ -7,12 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class ColumnService extends BaseService<ColumnDao, GoodsColumn> {
 
     private static final Logger logger = LoggerFactory.getLogger(GoodsService.class);
@@ -48,5 +50,9 @@ public class ColumnService extends BaseService<ColumnDao, GoodsColumn> {
         }
         goodsColumn.setVersion(0L);
         return this.save(goodsColumn);
+    }
+
+    public List<GoodsColumn> findListForIndex(){
+        return this.dao.findListForIndex();
     }
 }

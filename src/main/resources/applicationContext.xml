@@ -94,7 +94,7 @@
 	<!-- 重要配置：启用扫描并自动创建代理的功能  -->
 	<jpa:repositories base-package="com.shop" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
 
-
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 
 	<!-- 支持注解(不需要使用bean标签来管理bean了 -->
 	<context:annotation-config />

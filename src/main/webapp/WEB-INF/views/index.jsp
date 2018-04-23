@@ -44,6 +44,7 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="<%=path%>/rest/admin/list">用户管理</a></li>
+                        <li><a class="J_menuItem" href="<%=path%>/rest/banner/list">banner管理</a></li>
                     </ul>
                 </li>
                 <li>

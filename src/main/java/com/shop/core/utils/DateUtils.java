@@ -8,8 +8,7 @@ import java.util.Date;
 
 /**
  * JDK8时间操作新类
- *
- * @author yuweilun
+ * @author xzxx
  * @date 2017/8/14
  */
 public class DateUtils {
