@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>拼购商城</title>
+    <title>商城</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -68,7 +68,7 @@
                     <span>
                         <img src="<%=path %>/static/front/img/Icon_Tabbar_New_Arrival_Activve.svg" />
                     </span>
-                    <span class="tab-label"  style="color: #fa725a">上新</span>
+                    <span class="tab-label"  style="color: #fa725a">商品</span>
                 </a>
                 <a class="tab-item external" id="open-login-trade" href="javascript:void(0)">
                     <span>
@@ -85,6 +85,8 @@
             </nav>
         </div>
     </div>
+    <%@include file="../login/_login_botton_js.jsp"%>
+    <%@include file="../login/_login.jsp"%>
 </div>
 <script type='text/javascript' src='http://a.tbcdn.cn/libs/jquery/1.7.1/jquery.js' charset='utf-8'></script>
 <!-- Initialize Swiper -->

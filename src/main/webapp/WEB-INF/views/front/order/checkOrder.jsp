@@ -84,7 +84,7 @@
             return false;
         }
         $('#shippingDetail').val(shippingDetail);
-        $('#message').val($('#orderMessage').text());
+        $('#message').val($('#orderMessage').val());
         if(payFlag) {
             return false;
         }

@@ -7,11 +7,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>拼购商城</title>
+  <title>商城</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
   <%@include file="../../include_front_titile.jsp"%>
   <style>
     .detailRight-row3Left{
@@ -31,9 +30,9 @@
     <div class="content">
       <div class="row no-gutter itemlist-row">
         <div class="col-50 itemlist-row_l">喜欢的</div>
-        <div class="col-50 itemlist-row_r">共<em>${collectList.size()}</em>件</div>
+        <div class="col-50 itemlist-row_r">共<em>${list.size()}</em>件</div>
       </div>
-      <c:if test="${empty collectList}">
+      <c:if test="${empty list}">
         <div class="page-group" style="background: #eee;">
           <div class="errorContent">
             <img src="<%=path %>/static/front/img/error.png" alt="">
@@ -41,30 +40,22 @@
           </div>
         </div>
       </c:if>
-      <c:forEach items="${collectList}" var="val">
+      <c:forEach items="${list}" var="val">
         <div class="package-detail"  onclick="goGoodsInfo(${val.goods.id})">
           <div class="package-detailLeft">
-            <img src="${val.goods.url}${val.goods.img}" alt="">
-            <div class="detailLeft-font">已团：<em>${val.goods.sellNum + val.goods.sellNumDeviation}</em>件</div>
+            <img src="${val.goods.goodsImg}" alt="">
+            <div class="detailLeft-font"><em></em></div>
           </div>
           <div class="package-detailRight">
-            <div class="detailRight-row">${val.goods.name}</div>
-            <div class="detailRight-row2">${val.goods.intro}</div>
+            <div class="detailRight-row">${val.goods.goodsName}</div>
+            <div class="detailRight-row2">${val.goods.goodsIntro}</div>
             <div class="detailRight-row3">
               <div class="detailRight-row3Left">
-                <em>${val.goods.teamNum}</em>人团<i><b>￥</b>${val.goods.teamPrice}</i>单价<em>￥${val.goods.onePrice}</em>
+                <em></em><i><b>￥</b>${val.goods.goodsPrice}</i><em></em>
               </div>
-              <c:choose>
-                <c:when test="${val.goods.goodsStatusEnum.name().equals('SELL_OUT')}">
-                  <div class="group" style=" background: #4C4C4C">已售罄</div>
-                </c:when>
-                <c:when test="${time < val.goods.teamStartTime.longValue()}">
-                  <div class="group" style=" background: #4C4C4C">即将售卖</div>
-                </c:when>
-                <c:otherwise>
-                  <div class="group" >我要开团</div>
-                </c:otherwise>
-              </c:choose>
+              <div class="col-50" style="text-align: right;margin-top: 0.2rem;">
+                <a href="javascript:void(0)" style=" background: #4C4C4C">购买</a>
+              </div>
             </div>
           </div>
         </div>

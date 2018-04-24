@@ -117,6 +117,8 @@
         </span>
         <span class="tab-label">个人中心</span>
     </a>
+    <%@include file="login/_login_botton_js.jsp"%>
+    <%@include file="login/_login.jsp"%>
 </nav>
 <script type='text/javascript' src='<%=path %>/static/front/js/swiper.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='http://a.tbcdn.cn/libs/jquery/1.7.1/jquery.js' charset='utf-8'></script>

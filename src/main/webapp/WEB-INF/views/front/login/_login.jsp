@@ -26,11 +26,12 @@
     var sendSign=false;//重复提交标记
     var loginSign = false;//重复提交标记
     var loginStatus = 0;  //是否已登录标记
+    var isExecFunction = false;
     $(document).ready(function () {
         $.post('<%=path%>/rest/front/loginStatus',{},function (data) {
             if(data.code=='200'){
                 loginStatus=1;
-            } else if(data.code=='400'){
+            } else if(data.code=='401'){
                 loginStatus=2;
             }
         })
@@ -83,6 +84,9 @@
             success : function(data) {
                 if(data.code=='200'){
                     $('#guanbi').click();
+                    if (isExecFunction) {
+                        loginSuccess();
+                    }
                 } else {
                     loginSign = false;
                     $(this).html("登录");

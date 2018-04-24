@@ -34,7 +34,10 @@ public class CustomerService extends BaseService<CustomerDao, Customer> {
                     list.add(builder.like(root.get("mobile").get("name"), "%"+adminQuery.getName()+"%"));
                     list.add(builder.like(root.get("nickName"), "%"+adminQuery.getName()+"%"));
                 }
-                return builder.or(list.toArray(new Predicate[list.size()]));
+                if (list.size() > 0) {
+                    return builder.or(list.toArray(new Predicate[list.size()]));
+                }
+                return builder.and(list.toArray(new Predicate[list.size()]));
             }, adminQuery.getPageable());
             return page;
         }catch (Exception e) {

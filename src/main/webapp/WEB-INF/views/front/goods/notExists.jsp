@@ -25,10 +25,8 @@
         <div class="content">
             <div class="out_w">
                 <img src="<%=path %>/static/front/img/noSell.png" alt="window.location.href='<%=path%>/'">
-                <p>商品已售罄！</p>
+                <p>商品不可购买！</p>
             </div>
-            <div class="order-package">试试其他商品</div>
-            <%@include file="recommend.jsp"%>
         </div>
     </div>
 </div>

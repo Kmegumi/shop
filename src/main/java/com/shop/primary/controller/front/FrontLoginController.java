@@ -51,4 +51,11 @@ public class FrontLoginController extends BaseController {
     public String commonLogin(){
         return "front/login";
     }
+
+    @RequestMapping(value = "loginOut")
+    @ResponseBody
+    public ResultCodeVO loginOut(){
+        request.getSession().setAttribute(Config.CUSTOMER_INFO, null);
+        return ResultCodeVO.LOGIN_SUCCESS;
+    }
 }

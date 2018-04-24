@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>拼购商城</title>
+    <title>商城</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -107,7 +107,7 @@
         <div class="pay-row2">取消原因：</div>
         <textarea class="leave" id="cancel" name="cancel" placeholder="取消原因"></textarea>
     </div>
-    <a href="javascript:void(0);" onclick="cancel()" class="popup-footer">确认</a>
+    <a href="javascript:void(0);" onclick="cancelOrder()" class="popup-footer">确认</a>
 </div>
 </div>
 <script>
@@ -168,7 +168,7 @@
     function goGoodsInfo(id) {
         location.href = "<%=path %>/rest/front/goods/" + id;
     }
-    function cancel() {
+    function cancelOrder() {
         swal({
             title: "您确定要取消这条订单!",
             type: "warning",
@@ -181,13 +181,13 @@
             $.ajax({
                 url: '<%=path %>/rest/front/cancelOrder',
                 type: 'post',
-                data: {orderId: ${order.id}, cancelCause: $("#cancel").text()},
+                data: {orderId: ${order.id}, cancelCause: $("#cancel").val()},
                 success: function (data) {
                     if (data) {
                         if (data.code == '200') {
                             swal("取消成功！", "", "success")
                             $('.confirm').click(function () {   //额外绑定一个事件，当确定执行之后返回成功的页面的确定按钮，点击之后刷新当前页面或者跳转其他页面
-                                location.href = "<%=path%>/rest/front/orderDetail?orderNum='${order.orderNum};
+                                location.href = "<%=path%>/rest/front/orderDetail?orderNum=${order.orderNum}";
                             });
                             //跳转支付页面
                         }  else {

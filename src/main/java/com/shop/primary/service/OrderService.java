@@ -4,6 +4,7 @@ import com.shop.core.exception.ServiceException;
 import com.shop.primary.dao.GoodsDao;
 import com.shop.primary.dao.OrderDao;
 import com.shop.primary.entity.Order;
+import com.shop.primary.enums.OrderStatusEnum;
 import com.shop.primary.pojo.query.AdminQuery;
 import com.shop.primary.pojo.query.OrderQuery;
 import org.slf4j.Logger;
@@ -39,7 +40,10 @@ public class OrderService extends BaseService<OrderDao, Order> {
                     list.add(builder.like(root.get("orderNum"), "%"+orderQuery.getName()+"%"));
                     list.add(builder.like(root.get("shippingDetail"), "%"+orderQuery.getName()+"%"));
                 }
-                return builder.or(list.toArray(new Predicate[list.size()]));
+                if (list.size() > 0) {
+                    return builder.or(list.toArray(new Predicate[list.size()]));
+                }
+                return builder.and(list.toArray(new Predicate[list.size()]));
             }, orderQuery.getPageable());
             return page;
         }catch (Exception e) {
@@ -60,5 +64,12 @@ public class OrderService extends BaseService<OrderDao, Order> {
 
     public Order findByOrderNum(String orderNum){
         return this.dao.findByOrderNum(orderNum);
+    }
+
+    public List<Order> findByOrderStatusAndCustomerId(OrderStatusEnum orderStatus, Long customerId) {
+        if (orderStatus == null) {
+            return this.dao.findByCustomerId(customerId);
+        }
+        return this.dao.findByOrderStatusEnumAndCustomerId(orderStatus, customerId);
     }
 }

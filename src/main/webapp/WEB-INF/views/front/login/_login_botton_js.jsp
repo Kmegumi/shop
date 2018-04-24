@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: cc
-  Date: 2017/7/10
-  Time: 16:32
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script>
     /**登录相关**/
@@ -13,7 +6,8 @@
             redirectUrl = "<%=path%>/rest/front/personal"
             if(loginStatus == 1) {
                 location.href=redirectUrl;
-            }else if(loginStatus == 2){
+            }else if(loginStatus == 2 || loginStatus == 0){
+                isExecFunction = true;
                 $.popup('.popup-login');
             }else {
                 return;
@@ -23,15 +17,14 @@
             redirectUrl = "<%=path%>/rest/front/orderList";
             if(loginStatus == 1) {
                 location.href=redirectUrl;
-            }else if(loginStatus == 2){
+            }else if(loginStatus == 2 || loginStatus == 0){
+                isExecFunction = true;
                 $.popup('.popup-login');
             }else {
                 return;
             }
         });
     });
-
-
     function loginSuccess(){
         location.href=redirectUrl;
     }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @RequestMapping(value = "/front")
 @Controller
@@ -90,4 +91,31 @@ public class FrontOrderController extends BaseController {
         return new ResultCodeVO("400", "取消失败");
     }
 
+    @RequestMapping(value = "orderList")
+    public String orderList(OrderStatusEnum orderStatus, ModelMap modelMap){
+        Customer customer = checkCustomerInfo();
+        List<Order> list = orderService.findByOrderStatusAndCustomerId(orderStatus, customer.getId());
+        modelMap.addAttribute("list", list);
+        modelMap.addAttribute("orderStatusEnum", OrderStatusEnum.LIST);
+        if(orderStatus!=null){
+            modelMap.addAttribute("status", orderStatus.name());
+        }else{
+            modelMap.addAttribute("status", "");
+        }
+        return "front/order/list";
+    }
+
+    @RequestMapping("orderListInfo")
+    public String orderListInfo(OrderStatusEnum orderStatus, ModelMap modelMap) {
+        Customer customer = checkCustomerInfo();
+        List<Order> list = orderService.findByOrderStatusAndCustomerId(orderStatus, customer.getId());
+        modelMap.addAttribute("list", list);
+        modelMap.addAttribute("orderStatusEnum", OrderStatusEnum.LIST);
+        if(orderStatus!=null){
+            modelMap.addAttribute("status", orderStatus.name());
+        }else{
+            modelMap.addAttribute("status", "");
+        }
+        return "front/order/orderListInfo";
+    }
 }

@@ -10,7 +10,7 @@
         <location>/static/404.html</location>
     </error-page>
     <welcome-file-list>
-        <welcome-file>rest/admin/login</welcome-file>
+        <welcome-file>rest/front/index</welcome-file>
     </welcome-file-list>
     <!--  spring配置 -->
     <listener>

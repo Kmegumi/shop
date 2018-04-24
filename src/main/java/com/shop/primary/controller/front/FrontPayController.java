@@ -5,7 +5,6 @@ import com.shop.core.exception.ServiceException;
 import com.shop.primary.entity.Customer;
 import com.shop.primary.entity.Order;
 import com.shop.primary.pojo.vo.ResultCodeVO;
-import com.shop.primary.service.CustomerService;
 import com.shop.primary.service.OrderService;
 import com.shop.primary.service.PayService;
 import org.slf4j.Logger;

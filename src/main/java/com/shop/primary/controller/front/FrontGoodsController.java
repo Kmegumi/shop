@@ -21,12 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
-/**
- * @author megumi
- * @date 2018/4/23
- */
 @RequestMapping(value = "/front")
 @Controller
 public class FrontGoodsController extends BaseController {
@@ -137,4 +132,11 @@ public class FrontGoodsController extends BaseController {
         return new ResultCodeVO("201","");
     }
 
+    @RequestMapping(value = "collectList")
+    public String collectList(ModelMap modelMap){
+        Customer customer = checkCustomerInfo();
+        List<Collect> list = collectService.findAllByCustomerId(customer.getId());
+        modelMap.addAttribute("list", list);
+        return "front/collect/list";
+    }
 }

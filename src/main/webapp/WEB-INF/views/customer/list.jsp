@@ -46,7 +46,7 @@
                                 <td class="center">${demo.money}</td>
                                 <td class="center">${demo.nickName}</td>
                                 <td class="col-sm-2">
-                                    <a class="btn btn-primary J_menuItem" type="button" href="<%=path%>/rest/customer/pay?id=${demo.id}" >充值</a>
+                                    <input id="a${demo.id}" /><a class="btn btn-primary J_menuItem" type="button" href="javaScript:void(0);" onclick="payMoney(${demo.id})" >充值</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -59,6 +59,26 @@
     </div>
 </div>
 <script>
+    function payMoney(id) {
+        $.ajax({
+            type: 'post',
+            url: '<%=path%>/rest/customer/payMoney',
+            data: {id:id, money:$('#a'+id).val() },
+            cache: true,
+            dataType: "json",
+            async: true,
+            beforeSend: function () { },
+            success: function (data) {
+                if (data) {
+                    alert(data.msg)
+                    if (data.code == '200') {
+                        $('#formPage').submit();
+                    }
+                }
+            },
+            error: function () { }
+        });
+    }
 </script>
 </body>
 </html>

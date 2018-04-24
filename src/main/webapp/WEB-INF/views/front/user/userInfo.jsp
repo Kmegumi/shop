@@ -7,11 +7,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>拼购商城</title>
+  <title>商城</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
   <%@include file="../../include_front_titile.jsp"%>
 </head>
 <body>
@@ -24,17 +23,25 @@
     <div class="content">
       <a href="javascript:void(0);" class="row no-gutter profile-row" >
         <div class="col-60 profile-row_l personal-icon">
-          <c:if test="${not empty booker.headImg and booker.headImg != ''}"><img src="${booker.headImg}" alt=""></c:if>
-          <c:if test="${empty booker.headImg or booker.headImg == ''}"><img src="../../../static/front/img/Icon_Label_Avator.png" alt=""></c:if>
+          <c:if test="${not empty customer.headImg and customer.headImg != ''}"><img src="${customer.headImg}" alt=""></c:if>
+          <c:if test="${empty customer.headImg or customer.headImg == ''}"><img src="<%=path%>/static/front/img/Icon_Label_Avator.png" alt=""></c:if>
         </div>
     </a>
       <a href="javascript:void(0);" class="row no-gutter personal-mod">
         <div class="col-50 mod-left">昵称</div>
-        <div class="col-50 mod-right">${booker.nickName}</div>
+        <div class="col-50 mod-right">${customer.nickName}</div>
       </a>
       <a href="javascript:void(0);" class="row no-gutter personal-mod">
-        <div class="col-50 mod-left">开元商祺会</div>
-        <div class="col-50 mod-right">${booker.memberCard}</div>
+        <div class="col-50 mod-left">真名</div>
+        <div class="col-50 mod-right">${customer.name}</div>
+      </a>
+      <a href="javascript:void(0);" class="row no-gutter personal-mod">
+        <div class="col-50 mod-left">电话</div>
+        <div class="col-50 mod-right">${customer.mobile}</div>
+      </a>
+      <a href="javascript:void(0);" class="row no-gutter personal-mod">
+        <div class="col-50 mod-left">余额</div>
+        <div class="col-50 mod-right">${customer.money}</div>
       </a>
       <div class="profile-footer" onclick="loginOut()">退出登录</div>
     </div>
@@ -55,7 +62,7 @@
       async: true,
       success: function (data) {
         if (data) {
-          if (data.status == '200') {
+          if (data.code == '200') {
             location.href="<%=path %>/";
           } else {
             alert(data.msg);
